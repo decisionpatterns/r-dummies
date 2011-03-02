@@ -1,3 +1,7 @@
+2011-03-02 version 1.5.3
+ + DESCRIPTION: updated contact information and version number 
+ + man/dummies-package.Rd: updated version number
+
 2010-08-23
  + R/odg.R replaces odg.logo.R 
  - R/zzz.R: Changed to call .odg.logo and .pack.banner

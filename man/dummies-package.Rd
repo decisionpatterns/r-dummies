@@ -18,8 +18,8 @@
 \tabular{ll}{
 Package: \tab dummies\cr
 Type: \tab Package\cr
-Version: \tab 1.05.2\cr
-Date: \tab 2010-03-23\cr
+Version: \tab 1.5.3\cr
+Date: \tab 2011-03-02\cr
 License: \tab LGPL-3 \cr
 LazyLoad: \tab yes\cr
 }

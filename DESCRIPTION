@@ -1,12 +1,11 @@
 Package: dummies
 Type: Package
 Title: Create dummy/indicator variables flexibly and efficiently
-Version: 1.05.2
-Date: 2010-03-23
+Version: 1.5.3
+Date: 2011-03-02
 Author: Christopher Brown 
-Maintainer: Christopher Brown <cbrown@opendatagroup.com>
+Maintainer: Christopher Brown <chris.brown@decisionpatterns.com>
 Description: Expands factors, characters and other eligible classes into dummy/indicator variables.
-URL: http://www.opendatagroup.com, http://blog.opendatagroup.com/2009/09/30/r-the-dummies-package
+URL: http://www.decisionpatterns.com, http://blog.opendatagroup.com/2009/09/30/r-the-dummies-package
 License: LGPL-3
 LazyLoad: no
-
