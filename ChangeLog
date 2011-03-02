@@ -1,0 +1,53 @@
+2010-08-23
+ + R/odg.R replaces odg.logo.R 
+ - R/zzz.R: Changed to call .odg.logo and .pack.banner
+ + DEP: R/label2call.R: added
+ + DEP: R/labels2expression.R: added
+
+2010-03-23 Version 1.05.2 (cbrown)
+ - R/zzz.R changed to only show logo once
+   + setting options( "dummy.classes" = c("factor","character") ) was mistakenly
+     removed.      Now restored.
+   + .onLoad changed to .First.lib 
+
+ - DESCRIPTION: version numbering changed from x.x-y to x.x.x
+ 
+
+2009-09-13 Version 1.05 (cbrown)
+ + Properly specified license LGPL-3
+
+2009-09-12 Version 1.05 (cbrown)
+ + R/dummy.data.frame.R: 
+   + Added omit.constants parameter
+
+2009-09-04 (cbrown)
+ + man/dummies: fixed spelling error
+
+2009-08-26 Version 1.04 (cbrown)
+ + R/which.dummy.R:
+   + remove which.dummies:  No need for this alias to which.dummy
+   + fixed bug: previously did not work
+ + R/get.dummy.R: removed get.dummies alias for get.dummy
+ + R/dummy.R: added parameter verbose to print number of dummy variables created
+ + R/dummy.Rd: documented verbose parameter
+ + R/dummy.data.frame:
+   + Added 'names' argument for specifying specific columns takes precedent 
+     over dummy.classes 
+  
+
+2009-08-20 Version 1.03 (cbrown)
+ + R/dummy.data.frame.R:
+   + Fixed bug where dummy.data.frame did not set the attributes properly if
+     when adding non-dummy variables.
+
+2009-08-20 Version 1.02 (cbrown)
+ + R/zzz.R: Added
+   + moved options('dummy.classes') assignment to here
+
+2009-08-20 Version 1.01 (cbrown)
+ + R/which.dummy.R: Added
+ + R/get.dummy.R: Added
+
+2009-08-20 Version 1.0 (cbrown)
+ + Version 1.0 released.
+
