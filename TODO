@@ -2,16 +2,16 @@
   dummy variables besides categorically encoded, e.g. continuous with margins?
 
 x attributes( data, 'dummies')
-  We currently store all the indices, since they are always continuous we need to only store
-  the begining and the end.  Small price to pay,  Refused.
+  We currently store all the indices, since they are always continuous we 
+  need to only store the begining and the end.  Small price to pay,  Refused.
 
 x eliminate which.dummies and get.dummies? No. This is useful.
 
 - When subsetting a dummy frame it would be nice to track the dummy attributes
-  - I am not sure how this can be accomplished as attributes usually don't travel with the subset
+  - I am not sure how this can be accomplished as attributes usually don't 
+    travel with the subset
   - Use S4?
 
 - Add dummy.sep option e.g. options(dummy.sep)
 
 - The exception for variables of one level is problematic see dummy.R
-
