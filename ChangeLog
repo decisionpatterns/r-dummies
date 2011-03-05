@@ -1,3 +1,11 @@
+2011-03-05 Version 1.5.4
+ + LICENSE: added
+ + DESCRIPTION: fixed Depends, Suggests
+ + R/zzz.R: fixed packageStartupMessage
+ + R/odg.R: REMOVED
+ + TODO: updated
+
+
 2011-03-02 version 1.5.3
  + DESCRIPTION: updated contact information and version number 
  + man/dummies-package.Rd: updated version number

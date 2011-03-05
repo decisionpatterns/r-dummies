@@ -1,6 +1,8 @@
 - With label2call and labels2expression, should dummies support other types of 
   dummy variables besides categorically encoded, e.g. continuous with margins?
 
+- write testthat tests 
+
 x attributes( data, 'dummies')
   We currently store all the indices, since they are always continuous we 
   need to only store the begining and the end.  Small price to pay,  Refused.
