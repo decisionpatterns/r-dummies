@@ -17,3 +17,5 @@ x eliminate which.dummies and get.dummies? No. This is useful.
 - Add dummy.sep option e.g. options(dummy.sep)
 
 - The exception for variables of one level is problematic see dummy.R
+
+- Consider option to return original variables as well.
