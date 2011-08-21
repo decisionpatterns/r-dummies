@@ -19,3 +19,29 @@ x eliminate which.dummies and get.dummies? No. This is useful.
 - The exception for variables of one level is problematic see dummy.R
 
 - Consider option to return original variables as well.
+
+- Harlan Harris:
+Hi Chris,
+
+I'm using dummy(), not dummy.data.frame(). Here's the actual calls in the code I'm working on:
+
+cbind(dat, 
+                   dummy.fixed('product_basename', dat, drop=FALSE, fun=as.integer),
+                   dummy.fixed('purchase_channel', dat, drop=FALSE, fun=as.integer))
+
+And here's the code in dummy() I changed:
+
+    if (length(levels(x)) < 2) {
+        if (verbose) 
+            warning(name, " has only 1 level. Producing dummy variable anyway.")
+        return(matrix(fun(rep(1, length(x))), ncol = 1, dimnames = list(rownames(x), 
+            c(paste(name, sep, x[[1]], sep = "")))))
+    }
+
+I'm calling my code repeatedly on different data sets, some of which might have singular factors, which is where the problem popped up. The problem is not that the column is dropped, it's that it's not being transformed properly.
+
+No need for a pre-release package, just an FYI!
+
+Thanks!
+
+ -Harlan

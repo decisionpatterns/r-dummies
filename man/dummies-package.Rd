@@ -38,7 +38,7 @@ Maintainer: Christopher Brown
 
 \keyword{ package }
 \seealso{
-   \code{link{dummy}}
+   \code{\link{dummy}}
 }
 \examples{
    # See examples in the documentation for dummy
