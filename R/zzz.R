@@ -1,17 +1,16 @@
 
-# .onLoad <- function( libname, pkgname ) {
-.First.lib <- function( libname, pkgname ) {
+.onAttach <- function( libname, pkgname ) {
 
-  packageStartupMessage(
+  packageStartupMessage( 
     pkgname ,
     "-" ,
-    utils::installed.packages()[ pkgname , "Version"],
-    " provided by Decision Patterns.\n" ,
-    domain = NULL 
+    utils::packageVersion(pkgname, libname),
+    " provided by Decision Patterns\n" ,
+    domain = NA
   )
-
+  
   # THIS SETS THE DEFAULTS FOR dummy.classes
-  if( is.null( getOption("dummy.classes") ) )  
+  if( is.null( getOption("dummy.classes") ) )
     options( "dummy.classes" = c("factor","character") )
 
 }
