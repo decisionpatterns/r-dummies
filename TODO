@@ -1,3 +1,5 @@
+- examine how 'table' does a quick tabulation
+
 - With label2call and labels2expression, should dummies support other types of 
   dummy variables besides categorically encoded, e.g. continuous with margins?
 
