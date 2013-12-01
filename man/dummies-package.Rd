@@ -10,7 +10,7 @@
 \description{
   Contains functions to create dummy variables flexibly using 
   \code{model.matrix} returning them as either matrices or data frames for
-  further analysis.  Alsoi, contains methods, for manipulating dummy
+  further analysis.  Also, contains methods, for manipulating dummy
   variables.
 }
 
