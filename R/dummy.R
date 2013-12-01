@@ -85,7 +85,9 @@
 #' variables are retained regardless of the setting.
 #' 
 #' @aliases dummy dummy.data.frame
+#'
 #' @param x a single variable or variable _name_
+#'
 #' @param data an object such as a data.frame or matrix that has colnames
 #' @param drop Whether to drop (i.e. omit) dummy variables for unused levels.
 #' When \code{x} or \code{data[,x]} is a factor, this parameter variables for
@@ -176,6 +178,7 @@
 #' 
 #' 
 #' 
+#' @export
 dummy <- function( x, data=NULL, sep="", drop=TRUE, fun=as.integer, verbose = FALSE ) { 
 
 

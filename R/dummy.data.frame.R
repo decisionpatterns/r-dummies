@@ -12,7 +12,10 @@
 #
 # -----------------------------------------------------------------------------
 
-dummy.data.frame <- function( data, names=NULL, omit.constants = TRUE, dummy.classes=getOption("dummy.classes"), all=TRUE, ... ) {
+dummy.data.frame <- 
+  function( data, names=NULL, omit.constants = TRUE, 
+    dummy.classes=getOption("dummy.classes"), all=TRUE, ... 
+) {
 
   # Initialize the data.frame
     df<-data.frame( row.names=row.names(data) )     
