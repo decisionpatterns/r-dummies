@@ -10,11 +10,5 @@
       " Decision Patterns" ,
       domain = NA
     )
-  
-  # THIS SETS THE DEFAULTS FOR dummy.classes
-  if( is.null( getOption("dummy.classes") ) )
-    options( "dummy.classes" = c("factor","character") )
 
 }
-
-

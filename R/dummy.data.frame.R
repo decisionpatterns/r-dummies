@@ -1,20 +1,39 @@
-# -----------------------------------------------------------------------------
-# FUNCTION: dummy.data.frame
-#  Produce a dummy data.frame, i.e. where all categorical ( non-continous ) 
-#  variables are expanded. 
-#  
-#  all  : return all columns or only the categorical variables.
-#  names: names of cols to expand as dummy variables.
-#
-#  TODO:
-#   - matrix?
-#   - na.action
-#
-# -----------------------------------------------------------------------------
+#' @param names The names of the columns to expand to dummy variables. Takes
+#' precedent over \code{dummy.classes} parameter.
+#' 
+#' @param dummy.classes ( For \code{dummy.data.frame} only ) A vector of
+#' classes names for which dummy variables are created -or- "ALL" to create
+#' dummy variables for all columns irregardless of type.  By default, dummy
+#' variables are produced for factor and character class and be modified
+#' globally by \code{options('dummy.classes')}.
+#' 
+#' @param omit.constants Whether to omit dummy variables that are constants,
+#' i.e. contain only one value. Overridden by \code{drop==FALSE}.
+#' 
+#' @param all ( For \code{dummy.data.frame} only ).  Whether to return columns
+#' that are not dummy classes. The default is \code{TRUE} and returns all 
+#' columns; non-dummy classes are untouched.
+#' 
+#' @param ...  arguments passed to \code{\link{dummy}}
+#'
+#' @examples
+#'   dummy(iris)
+#'   dummy(iris, all=FALSE)
+#' 
+#'   dummy(mtcars, dummy.class="numeric" )
+#'   dummy(iris, dummy.class="ALL" )
+#' 
+#' @rdname dummy
+#' @export
 
 dummy.data.frame <- 
-  function( data, names=NULL, omit.constants = TRUE, 
-    dummy.classes=getOption("dummy.classes"), all=TRUE, ... 
+  function( 
+      data
+    , names = NULL
+    , omit.constants = TRUE
+    , dummy.classes = getOption("dummy.classes", c("factor","character") )
+    , all = TRUE
+    , ... 
 ) {
 
   # Initialize the data.frame
@@ -23,12 +42,11 @@ dummy.data.frame <-
 
     for( nm in names(data) ) {
       
-# cat( nm )
       old.attr <- attr(df,'dummies')
       
       if(
         nm %in% names || 
-        ( is.null(names) && ( dummy.classes == "ALL" || class(data[,nm]) %in% dummy.classes ) )
+        ( is.null(names) && ( dummy.classes == "ALL" || class(data[[nm]]) %in% dummy.classes ) )
       ) {
 
         dummies <- dummy( nm, data, ... )
@@ -51,14 +69,13 @@ dummy.data.frame <-
     }
 
     attr( df, 'dummies' ) <- new.attr
+    class(df) <- class(data)
     return(df)
 
 }
-      
-    
-# TESTING:
-# dummy.data.frame(iris)
-# dummy.data.frame(iris all=FALSE)
 
-
-
+#' @export 
+#' @rdname dummy
+dummy.matrix <- function(data, ... )
+  dummy.data.frame(data,...)
+  

@@ -1,56 +1,35 @@
-# -----------------------------------------------------------------------------
-# FUNCTION: dummy.data.frame:
-#
-#   Given a _name_ of a column and a data frame, return the data.frame for that
-#
-#   x          : a data.frame, matrix or single variable or variable name
-#
-#   data       : An object such as a matrix or data.frame with colnames.
-#                If provided, x is take as the the name of a column on the data
-#
-#   sep        : the seperator to be used between the variable name and the 
-#                value.  Used in new variable construction.  Also, set as an
-#                attribute
-#
-#   drop       : Drop unused levels?.  When x is a factor, whether to produce 
-#                dummy variable for only the used levels. If x has unused 
-#                levels and drop=T ( the default ), dummy variables will not be
-#                created for the values of y and not the levels.
-# 
-#   constant   : Whether to return an identity vectors for variables that 
-#                assume one value.
-#                
-#   fun        : Function to coerce the value in the final matrix.  
-#                Default: 'as,integer'
-#
-#   verbose    : logical.  Whether to print(cat) the number of variables 
-#                Default: FALSE
-#   
-#   NA         : Options: 
-#                 encode as a seperate dummy variable default.
-#                 create a row of NA for that observation --> model.frame(
-#                   na.action=na.pass )
-#                 omit
-#
-#  TODO:
-#   - If continuous variables, allow for quantile encoding.  
-#   - 
-# -----------------------------------------------------------------------------
-
-
-
 #' Flexible, efficient creation of dummy variables.
 #' 
 #' This package flexibly and efficiently creates dummy variables for a variety
 #' of structures.
 #' 
+#' @param x single variable or variable _name_
+#'
+#' @param data  object such as a data.frame, data.table, tibble or matrix that 
+#' has colnames.
+#' 
+#' @param drop logical; Whether to drop (i.e. omit) dummy variables for unused levels.
+#' When \code{x} or \code{data[[x]]} is a factor, this parameter variables for
+#' only the used levels. By default, dummies are created only for the used
+#' levels, i.e. TRUE.
+#' 
+#' @param sep string; separator character used between the variable name and 
+#' the value in the dummy variable name
+#' 
+#' @param fun Function used to coerce values in the resulting matrix or frame.
+#' Default: \code{as.integer}. \code{as.logical} or \code{as.factor} also work.
+#' 
+#' @param verbose logical; whether to print(cat) the number of dummy variables
+#' created Default: \code{FALSE}
+#' 
+#' @details  
 #' 
 #' \code{dummy} take a single variable OR the name of single variable and a
 #' data frame. It coerces the variable to a factor and returns a matrix of
 #' dummy variables using \code{\link{model.matrix}}.  If the \code{data} has
 #' rownames, these are retained.
 #' 
-#' Optionally, the parameter \code{drop} indicates that that dummy variables
+#' The parameter \code{drop} indicates that that dummy variables
 #' will be created for only the expressed levels of factors.  Setting it to
 #' false will produce dummy variables for all levels of all factors.
 #' 
@@ -86,63 +65,30 @@
 #' 
 #' @aliases dummy dummy.data.frame
 #'
-#' @param x a single variable or variable _name_
-#'
-#' @param data an object such as a data.frame or matrix that has colnames
-#' @param drop Whether to drop (i.e. omit) dummy variables for unused levels.
-#' When \code{x} or \code{data[,x]} is a factor, this parameter variables for
-#' only the used levels. By default, dummies are created only for the used
-#' levels, i.e. TRUE.
-#' @param sep For the names of the created dummy variables, sep is the
-#' character used between the variable name and the value.
-#' @param fun Function used to coerce values in the resulting matrix or frame.
-#' @param verbose logical.  Whether to print(cat) the number of dummy variables
-#' created Default: FALSE
-#' @param names The names of the columns to expand to dummy variables. Takes
-#' precedent over \code{dummy.classes} parameter.
-#' @param dummy.classes ( For \code{dummy.data.frame} only ) A vector of
-#' classes names for which dummy variables are created -or- "ALL" to create
-#' dummy variables for all columns irregardless of type.  By default, dummy
-#' variables are produced for factor and character class and be modified
-#' globally by options('dummy.classes' ).
-#' @param omit.constants Whether to omit dummy variables that are constants,
-#' i.e. contain only one value. Overridden by \code{drop==FALSE}.
-#' @param all ( For \code{dummy.data.frame} only ).  Whether to return columns
-#' that are not dummy classes.  The default is TRUE and returns all classes.
-#' Non dummy classes are untouched.
-#' @param ...  arguments passed to \code{\link{dummy}}
-#' @return
 #' 
-#' \code{dummy} returns a matrix with the number of rows equal to the that of
-#' given variable.  By default, the matrix contains integers, but the exact
-#' type can be affected by \code{fun} argument. Rownames are retained if the
-#' supplied variable has associate row names.
+#' @return 
 #' 
-#' \code{dummy.data.frame} returns a data.frame in which variables are expanded
-#' to dummy variables if they are one of the dummy classes.  The columns are
-#' return in the same order as the input with dummy variable columns replacing
-#' the original column.
+#' If \code{x} is atomic, a matrix (or data.frame) with the number of rows equal 
+#' to the number elements of \code{x}. By result is an integer matrix, but the 
+#' exact type can be affected by the \code{fun} argument. See examples. 
+#'  
+#' For data structures (i.e. data.frames, data.tables or tibbles), a similar 
+#' structure with dummy columns expanded and replaced. Columns order is 
+#' preserved. Rownames are maintained if applcable. 
+#'  
 #' @author Christopher Brown
+#' 
 #' @seealso
 #' 
-#' \code{\link{model.frame}}, \code{\link{model.matrix}}, \code{\link{factor}}
-#' @references
+#'   \code{\link{model.frame}}, \cr
+#'   \code{\link{model.matrix}}, \cr 
+#'   \code{\link{factor}}
 #' 
-#' http://wiki.r-project.org/rwiki/doku.php?id=tips:data-manip:create_indicator
-#' 
-#' http://tolstoy.newcastle.edu.au/R/help/00b/1199.html
-#' 
-#' http://tolstoy.newcastle.edu.au/R/help/03a/6409.html
-#' 
-#' http://tolstoy.newcastle.edu.au/R/help/01c/0580.html
-#' 
-#' Many other discussions on R-Help.  Too many to list.
 #' @keywords manip models
 #' @examples
-#' 
-#' 
+#'   
 #'   letters <- c( "a", "a", "b", "c", "d", "e", "f", "g", "h", "b", "b" )
-#'   dummy( as.character(letters) )
+#'   dummy( letters )
 #'   dummy( letters[1:6] )
 #'   
 #'   l <- as.factor(letters)[ c(1:3,1:6,4:6) ]
@@ -169,18 +115,22 @@
 #'   dummy( as.factor(letters)[c(1,1,1,1)] , drop = FALSE )   
 #' 
 #'   
-#'   dummy.data.frame(iris)
-#'   dummy.data.frame(iris, all=FALSE)
-#' 
-#' 
-#'   dummy.data.frame(iris, dummy.class="numeric" )
-#'   dummy.data.frame(iris, dummy.class="ALL" )
-#' 
-#' 
-#' 
 #' @export
-dummy <- function( x, data=NULL, sep="", drop=TRUE, fun=as.integer, verbose = FALSE ) { 
 
+dummy <- function( x, ... ) UseMethod("dummy")
+
+#' @rdname dummy
+#' @export
+
+
+dummy.default <- function( 
+    x
+  , data    = NULL
+  , sep     = getOption('dummy.sep', "" )
+  , drop    = TRUE
+  , fun     = as.integer
+  , verbose = FALSE 
+) { 
 
   # HANDLE IF DATA IS MISSING.  
     if( is.null(data) ) {
@@ -190,7 +140,7 @@ dummy <- function( x, data=NULL, sep="", drop=TRUE, fun=as.integer, verbose = FA
     } else {
       if( length(x) > 1 ) stop( "More than one variable provided to produce dummy variable." )  
       name <- x
-      x    <- data[ , name]
+      x    <- data[[name]]
     }
 
 
@@ -235,8 +185,3 @@ dummy <- function( x, data=NULL, sep="", drop=TRUE, fun=as.integer, verbose = FA
     return(mm)   
 
 }
-
-                                                           
-
-# TESTING:  See Rd Files
-
